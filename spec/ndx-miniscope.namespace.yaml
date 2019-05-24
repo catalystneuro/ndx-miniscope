@@ -1,0 +1,11 @@
+namespaces:
+- author: Ben Dichter
+  contact: ben.dichter@gmail.com
+  doc: holds metadata relevant for miniscope acquisition
+  name: ndx-miniscope
+  schema:
+  - namespace: core
+    neurodata_types:
+    - ElectricalSeries
+  - source: ndx-miniscope.extensions.yaml
+  version: 0.1.0
