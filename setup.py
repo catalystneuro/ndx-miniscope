@@ -31,8 +31,8 @@ setup_args = {
 
 
 def _copy_spec_files(project_dir):
-    ns_path = os.path.join(project_dir, 'spec', 'ndx-miniscope.namespace.yaml')
-    ext_path = os.path.join(project_dir, 'spec', 'ndx-miniscope.extensions.yaml')
+    ns_path = os.path.join(project_dir, 'spec', 'miniscope.namespace.yaml')
+    ext_path = os.path.join(project_dir, 'spec', 'miniscope.extensions.yaml')
 
     dst_dir = os.path.join(project_dir, 'src', 'pynwb', 'ndx_miniscope', 'spec')
     if not os.path.exists(dst_dir):

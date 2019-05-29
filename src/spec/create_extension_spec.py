@@ -2,37 +2,26 @@
 from pynwb.spec import (
     NWBNamespaceBuilder,
     NWBGroupSpec,
-    NWBAttributeSpec,
 )
 from export_spec import export_spec
 
 
 def main():
     ns_builder = NWBNamespaceBuilder(doc='holds metadata relevant for miniscope acquisition',
-                                     name='ndx-miniscope',
+                                     name='miniscope',
                                      version='0.1.0',
                                      author='Ben Dichter',
                                      contact='ben.dichter@gmail.com')
 
-    # TODO: define the new data types
-    custom_electrical_series = NWBGroupSpec(
-        neurodata_type_def='TetrodeSeries',
-        neurodata_type_inc='ElectricalSeries',
-        doc='A custom ElectricalSeries for my lab',
-        attributes=[
-            NWBAttributeSpec(
-                name='trode_id',
-                doc='the tetrode id',
-                dtype='int'
-            )
-        ],
-    )
+    Miniscope = NWBGroupSpec(neurodata_type_def='Miniscope', neurodata_type_inc='Device',
+                             doc='extension of Device to hold metadata specific to Miniscopes')
+    Miniscope.add_attribute(name='excitation', doc='magnitude of excitation', dtype='int', required=False)
+    Miniscope.add_attribute(name='msCamExposure', doc='exposure of camera (max=255)', dtype='int', required=False)
+    Miniscope.add_attribute(name='recordLength', doc='unknown', dtype='int', required=False)
 
-    # TODO: add the new data types to this list
-    new_data_types = [custom_electrical_series]
+    new_data_types = [Miniscope]
 
-    # TODO: include the types that are used and their namespaces (where to find them)
-    ns_builder.include_type('ElectricalSeries', namespace='core')
+    ns_builder.include_type('Device', namespace='core')
 
     export_spec(ns_builder, new_data_types)
 
