@@ -7,7 +7,7 @@ from export_spec import export_spec
 def main():
     ns_builder = NWBNamespaceBuilder(doc='holds metadata relevant for miniscope acquisition',
                                      name='ndx-miniscope',
-                                     version='0.2.1',
+                                     version='0.2.2',
                                      author='Ben Dichter',
                                      contact='ben.dichter@gmail.com')
 

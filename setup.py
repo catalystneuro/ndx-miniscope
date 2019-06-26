@@ -7,7 +7,7 @@ from shutil import copy2
 
 setup_args = {
     'name': 'ndx-miniscope',
-    'version': '0.2.1',
+    'version': '0.2.2',
     'description': 'holds metadata relevant for miniscope acquisition',
     'author': 'Ben Dichter',
     'author_email': 'ben.dichter@gmail.com',
