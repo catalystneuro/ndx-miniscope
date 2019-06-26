@@ -21,7 +21,60 @@ pip install ndx-miniscope
 
 
 ```python
+import os
+from ndx_miniscope import read_settings, read_notes, load_miniscope_timestamps
+from pynwb import NWBFile, NWBHDF5IO
+from datetime import datetime
+from dateutil.tz import tzlocal
+from pynwb.image import ImageSeries
+from natsort import natsorted
+from glob import glob
 
+
+data_dir = 'path/to/data_dir'
+
+session_start_time = datetime(2017, 4, 15, 12, tzinfo=tzlocal())
+
+nwb = NWBFile('session_description', 'identifier', session_start_time)
+
+miniscope = read_settings(data_dir)
+nwb.add_device(miniscope)
+
+annotations = read_notes(data_dir)
+if annotations:
+    nwb.add_acquisition(annotations)
+
+ms_files = [os.path.split(x)[1] for x in natsorted(glob(os.path.join(data_dir, 'msCam*.avi')))]
+behav_files = [os.path.split(x)[1] for x in natsorted(glob(os.path.join(data_dir, 'behavCam*.avi')))]
+
+nwb.add_acquisition(
+    ImageSeries(
+        name='OnePhotonSeries',
+        format='external',
+        external_file=ms_files,
+        timestamps=load_miniscope_timestamps(data_dir),
+        starting_frame=[0] * len(ms_files)
+    )
+)
+
+nwb.add_acquisition(
+    ImageSeries(
+        name='behaviorCam',
+        format='external',
+        external_file=behav_files,
+        timestamps=load_miniscope_timestamps(data_dir, cam_num=2),
+        starting_frame=[0] * len(behav_files)
+    )
+)
+
+
+save_path = os.path.join(data_dir, 'test_out.nwb')
+with NWBHDF5IO(save_path, 'w') as io:
+    io.write(nwb)
+
+# test read
+with NWBHDF5IO(save_path, 'r') as io:
+    nwb = io.read()
 ```
 
 

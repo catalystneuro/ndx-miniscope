@@ -11,7 +11,3 @@ groups:
     dtype: int
     doc: exposure of camera (max=255)
     required: false
-  - name: recordLength
-    dtype: int
-    doc: unknown
-    required: false
