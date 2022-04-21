@@ -5,13 +5,17 @@ import os
 from setuptools import setup, find_packages
 from shutil import copy2
 
+with open(os.path.join(path, "README.md")) as f:
+    long_description = f.read()
+
 setup_args = {
     'name': 'ndx-miniscope',
     'version': '0.2.2',
     'description': 'holds metadata relevant for miniscope acquisition',
+    'long_description': long_description,
     'author': 'Ben Dichter',
-    'author_email': 'ben.dichter@gmail.com',
-    'url': '',
+    'author_email': 'ben.dichter@catalystneuro.com',
+    'url': 'https://github.com/catalystneuro/ndx-miniscope',
     'license': '',
     'install_requires': [
         'pynwb'
