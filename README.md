@@ -1,4 +1,4 @@
-# ndx-miniscope Extension for NWB:N
+# ndx-miniscope Extension for NWB
 
 This is a Neurodata Extension (NDX) for Neurodata Without Borders: Neurophysiology (NWB:N) 2.0 for Miniscope acquisition data.
 
