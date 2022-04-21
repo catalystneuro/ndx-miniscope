@@ -14,7 +14,7 @@ load_namespaces(ns_path)
 Miniscope = get_class('Miniscope', name)
 
 
-def load_miniscope_timestamps(fpath, cam_num=1):
+def read_miniscope_timestamps(fpath, cam_num=1):
     """Reads timestamp.dat and outputs a list of times in seconds
 
     Parameters
