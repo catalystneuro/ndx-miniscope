@@ -11,6 +11,9 @@ path = Path(__file__).parent
 with open(os.path.join(path, "README.md")) as f:
     long_description = f.read()
 
+with open(path / "requirements.txt") as f:
+    install_requires = f.readlines()
+
 setup_args = {
     'name': 'ndx-miniscope',
     'version': '0.3.0',
@@ -20,9 +23,7 @@ setup_args = {
     'author_email': 'ben.dichter@catalystneuro.com',
     'url': 'https://github.com/catalystneuro/ndx-miniscope',
     'license': '',
-    'install_requires': [
-        'pynwb'
-    ],
+    'install_requires': install_requires,
     'packages': find_packages('src/pynwb'),
     'package_dir': {'': 'src/pynwb'},
     'package_data': {'ndx_miniscope': [
