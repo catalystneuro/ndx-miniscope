@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 
 import os
+from pathlib import Path
+from shutil import copy2
 
 from setuptools import setup, find_packages
-from shutil import copy2
+
+path = Path(__file__).parent
 
 with open(os.path.join(path, "README.md")) as f:
     long_description = f.read()
 
 setup_args = {
     'name': 'ndx-miniscope',
-    'version': '0.2.2',
+    'version': '0.3.0',
     'description': 'holds metadata relevant for miniscope acquisition',
     'long_description': long_description,
     'author': 'Ben Dichter',

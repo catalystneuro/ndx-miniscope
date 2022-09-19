@@ -56,9 +56,11 @@ def read_settings(fpath):
         fpath = os.path.join(fpath, 'settings_and_notes.dat')
     df = pd.read_csv(fpath, sep='\t').loc[0]
 
-    return Miniscope(name='Miniscope',
-                     excitation=int(df['excitation']),
-                     msCamExposure=int(df['msCamExposure']))
+    return Miniscope(
+        name='Miniscope',
+        excitation=int(df['excitation']),
+        msCamExposure=int(df['msCamExposure']),
+    )
 
 
 def read_notes(fpath):
@@ -78,8 +80,22 @@ def read_notes(fpath):
         fpath = os.path.join(fpath, 'settings_and_notes.dat')
     df = pd.read_csv(fpath, skiprows=3, delimiter='\t')
     if len(df):
-        return AnnotationSeries(name='notes', data=df['Note'].values,
-                                timestamps=df['elapsedTime'].values / 1000,
-                                description='read from miniscope settings_and_notes.dat file')
-    else:
-        return
+        return AnnotationSeries(
+            name='notes',
+            data=df['Note'].values,
+            timestamps=df['elapsedTime'].values / 1000,
+            description='read from miniscope settings_and_notes.dat file',
+        )
+
+
+def get_starting_frames(video_files):
+
+    import cv2
+
+    out = [0]
+    for video_file in video_files[:-1]:
+        cap = cv2.VideoCapture(video_file)
+        length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        out.append(length)
+
+    return out

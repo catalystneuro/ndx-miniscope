@@ -15,8 +15,17 @@ This repo provides an extension to the `Device` core NWB neurodata_type called `
 
 ## python
 ### Installation
+
+Get most recent release:
 ```bash
 pip install ndx-miniscope
+```
+
+Install latest:
+```bash
+git clone https://github.com/catalystneuro/ndx-miniscope.git
+cd ndx-miniscope
+pip install -e .
 ```
 
 ### Usage
@@ -24,7 +33,7 @@ pip install ndx-miniscope
 
 ```python
 import os
-from ndx_miniscope import read_settings, read_notes, read_miniscope_timestamps
+from ndx_miniscope import read_settings, read_notes, read_miniscope_timestamps, get_starting_frames
 from pynwb import NWBFile, NWBHDF5IO
 from datetime import datetime
 from dateutil.tz import tzlocal
@@ -43,19 +52,20 @@ miniscope = read_settings(data_dir)
 nwb.add_device(miniscope)
 
 annotations = read_notes(data_dir)
-if annotations:
+if annotations is not None:
     nwb.add_acquisition(annotations)
 
-ms_files = [os.path.split(x)[1] for x in natsorted(glob(os.path.join(data_dir, 'msCam*.avi')))]
-behav_files = [os.path.split(x)[1] for x in natsorted(glob(os.path.join(data_dir, 'behavCam*.avi')))]
+ms_files = natsorted(glob(os.path.join(data_dir, 'msCam*.avi')))
+behav_files = natsorted(glob(os.path.join(data_dir, 'behavCam*.avi')))
+
 
 nwb.add_acquisition(
     ImageSeries(
         name='OnePhotonSeries',
         format='external',
-        external_file=ms_files,
+        external_file=[os.path.split(x)[1] for x in ms_files],
         timestamps=read_miniscope_timestamps(data_dir),
-        starting_frame=[0] * len(ms_files)
+        starting_frame=get_starting_frames(ms_files),
     )
 )
 
@@ -63,9 +73,9 @@ nwb.add_acquisition(
     ImageSeries(
         name='behaviorCam',
         format='external',
-        external_file=behav_files,
+        external_file=[os.path.split(x)[1] for x in behav_files],
         timestamps=read_miniscope_timestamps(data_dir, cam_num=2),
-        starting_frame=[0] * len(behav_files)
+        starting_frame=get_starting_frames(behav_files),
     )
 )
 
