@@ -4,12 +4,19 @@ This is a Neurodata Extension (NDX) for Neurodata Without Borders (NWB) 2.0 for 
 
 [![PyPI version](https://badge.fury.io/py/ndx-miniscope.svg)](https://badge.fury.io/py/ndx-miniscope)
 
-The Miniscope acquisition software generally outputs the following files:
+The Miniscope V3 acquisition software generally outputs the following files:
 
 * msCam[##].avi
 * behavCam[##].avi
 * timestamp.dat
 * settings_and_notes.dat
+
+The Miniscope V4 acquisition software generally outputs the following files:
+
+* [#].avi
+* {notes,headOrientation}.csv
+* metaData.json
+* timestamps.csv
 
 This repo provides an extension to the `Device` core NWB neurodata_type called `Miniscope` which contains fields for the data in `settings_and_notes.dat`. The following code demonstrates how to use this extension to properly convert Miniscope acquisition data into NWB by creating external links, which does not require the video data to be copied into the NWB file.
 
@@ -33,59 +40,44 @@ pip install -e .
 
 ```python
 import os
-from ndx_miniscope import read_settings, read_notes, read_miniscope_timestamps, get_starting_frames
+from ndx_miniscope import MiniscopeLoader
 from pynwb import NWBFile, NWBHDF5IO
 from datetime import datetime
 from dateutil.tz import tzlocal
-from pynwb.image import ImageSeries
-from natsort import natsorted
-from glob import glob
 
 
-data_dir = 'path/to/data_dir'
+data_dir = "path/to/data_dir"
 
 session_start_time = datetime(2017, 4, 15, 12, tzinfo=tzlocal())
 
-nwb = NWBFile('session_description', 'identifier', session_start_time)
+nwb = NWBFile("session_description", "identifier", session_start_time)
 
-miniscope = read_settings(data_dir)
-nwb.add_device(miniscope)
+miniscope_loader = MiniscopeLoader(data_dir, version="V3")
+nwb.add_device(miniscope_loader.read_settings())
 
-annotations = read_notes(data_dir)
+annotations = miniscope_loader.read_notes()
 if annotations is not None:
     nwb.add_acquisition(annotations)
 
-ms_files = natsorted(glob(os.path.join(data_dir, 'msCam*.avi')))
-behav_files = natsorted(glob(os.path.join(data_dir, 'behavCam*.avi')))
-
-
 nwb.add_acquisition(
-    ImageSeries(
-        name='OnePhotonSeries',
-        format='external',
-        external_file=[os.path.split(x)[1] for x in ms_files],
-        timestamps=read_miniscope_timestamps(data_dir),
-        starting_frame=get_starting_frames(ms_files),
+    miniscope_loader.external_image_series(
+        name="OnePhotonSeries",
+        file_pattern="msCam*avi",
+    )
+)
+nwb.add_acquisition(
+    miniscope_loader.external_image_series(
+        name="behaviorCam",
+        file_pattern="behavCam*avi",
     )
 )
 
-nwb.add_acquisition(
-    ImageSeries(
-        name='behaviorCam',
-        format='external',
-        external_file=[os.path.split(x)[1] for x in behav_files],
-        timestamps=read_miniscope_timestamps(data_dir, cam_num=2),
-        starting_frame=get_starting_frames(behav_files),
-    )
-)
-
-
-save_path = os.path.join(data_dir, 'test_out.nwb')
-with NWBHDF5IO(save_path, 'w') as io:
+save_path = os.path.join(data_dir, "test_out.nwb")
+with NWBHDF5IO(save_path, "w") as io:
     io.write(nwb)
 
 # test read
-with NWBHDF5IO(save_path, 'r') as io:
+with NWBHDF5IO(save_path, "r") as io:
     nwb = io.read()
 ```
 

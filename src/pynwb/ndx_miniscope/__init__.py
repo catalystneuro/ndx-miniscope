@@ -1,1 +1,3 @@
-from .miniscope import *
+from .miniscope import MiniscopeLoader
+
+__all__ = ["MiniscopeLoader"]

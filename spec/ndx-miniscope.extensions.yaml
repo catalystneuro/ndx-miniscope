@@ -3,6 +3,9 @@ groups:
   neurodata_type_inc: Device
   doc: extension of Device to hold metadata specific to Miniscopes
   attributes:
+  - name: version
+    dtype: text
+    doc: Miniscope version e.g., V3, V4
   - name: excitation
     dtype: int
     doc: magnitude of excitation
@@ -10,4 +13,42 @@ groups:
   - name: msCamExposure
     dtype: int
     doc: exposure of camera (max=255)
+    required: false
+  - name: ROI
+    dtype: int
+    dims:
+    - height, leftEdge, topEdge, width
+    shape:
+    - 4
+    doc: The bounding box of the portion of the video that is saved to disk. Edges
+      are zero-indexed
+    required: false
+  - name: compression
+    dtype: text
+    doc: Compression CODEC. GREY is no compression. FFV1 losslessly compresses.
+    required: false
+  - name: deviceType
+    dtype: text
+    doc: A device type supported by Miniscope-DAQ Software (e.g., Miniscope_V4_BNO)
+    required: false
+  - name: ewl
+    dtype: int
+    doc: position of the electro-tunable lens focal plane. ElectroWetting Lens value
+      range (-127 - 127)
+    required: false
+  - name: frameRate
+    dtype: text
+    doc: Frame rate (e.g., 20FPS)
+    required: false
+  - name: framesPerFile
+    dtype: int
+    doc: Frames stored per file
+    required: false
+  - name: gain
+    dtype: float32
+    doc: Gain settings (1, 2, 3.5) corresponding to Low, Medium, High
+    required: false
+  - name: led0
+    dtype: int
+    doc: Excitation LED intensity (range 0 - 100)
     required: false

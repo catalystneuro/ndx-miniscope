@@ -1,6 +1,6 @@
 namespaces:
-- author: Ben Dichter
-  contact: ben.dichter@gmail.com
+- author: Ben Dichter, Chris Brozdowski
+  contact: ben.dichter@gmail.com, cbroz@datajoint.com
   doc: holds metadata relevant for miniscope acquisition
   name: ndx-miniscope
   schema:
@@ -8,4 +8,4 @@ namespaces:
     neurodata_types:
     - Device
   - source: ndx-miniscope.extensions.yaml
-  version: 0.2.2
+  version: 0.2.3
