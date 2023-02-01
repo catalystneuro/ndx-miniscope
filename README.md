@@ -100,4 +100,4 @@ generateExtension('path/to/ndx-miniscope/spec');
 ```
 
 ### Usage
-under construction
+under construction...
