@@ -1,13 +1,15 @@
 import json
 import os
-import pandas as pd
 from glob import glob
+from warnings import warn
+
+import pandas as pd
 from natsort import natsorted
 from numpy import ndarray
-from pynwb import NWBFile, load_namespaces, get_class
 from pynwb.image import ImageSeries
 from pynwb.misc import AnnotationSeries
-from warnings import warn
+
+from pynwb import NWBFile, get_class, load_namespaces
 
 name = "ndx-miniscope"
 
@@ -70,9 +72,7 @@ class MiniscopeLoader:
 
         return self._to_seconds(tt_msec)
 
-    def read_settings(
-        self, excitation: int = None, msCamExposure: int = None, **kwargs
-    ) -> Miniscope:
+    def read_settings(self, excitation: int = None, msCamExposure: int = None, **kwargs) -> Miniscope:
         """Creates a Miniscope object with leaded settings
 
         For V3, reads settings_and_notes.dat. For V4, supply excitation and
@@ -196,9 +196,7 @@ class MiniscopeLoader:
             # https://github.com/Aharoni-Lab/Miniscope-DAQ-QT-Software/blob/master/source/datasaver.cpp#L345
             data = None
 
-            raise NotImplementedError(
-                "The portion of the V4 export is not yet complete."
-            )
+            raise NotImplementedError("The portion of the V4 export is not yet complete.")
 
         return AnnotationSeries(
             name=name,
@@ -208,7 +206,6 @@ class MiniscopeLoader:
         )
 
     def _get_starting_frames(self, video_files):
-
         import cv2
 
         out = [0]
@@ -235,9 +232,7 @@ class MiniscopeLoader:
         """
         files = natsorted(glob(os.path.join(self._fpath, file_pattern)))
         if not files:
-            raise FileNotFoundError(
-                f"Could not find any files matching {file_pattern} in {self._fpath}"
-            )
+            raise FileNotFoundError(f"Could not find any files matching {file_pattern} in {self._fpath}")
         return ImageSeries(
             name=name,
             format="external",

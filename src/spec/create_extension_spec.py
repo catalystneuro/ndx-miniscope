@@ -1,6 +1,5 @@
-from pynwb.spec import NWBNamespaceBuilder, NWBGroupSpec
-
 from export_spec import export_spec
+from pynwb.spec import NWBGroupSpec, NWBNamespaceBuilder
 
 # See also https://github.com/Aharoni-Lab/Miniscope-DAQ-QT-Software/blob/master/deviceConfigs/userConfigProps.json
 
@@ -25,9 +24,7 @@ def main():
         dtype="text",
         required=True,
     )
-    Miniscope.add_attribute(
-        name="excitation", doc="magnitude of excitation", dtype="int", required=False
-    )
+    Miniscope.add_attribute(name="excitation", doc="magnitude of excitation", dtype="int", required=False)
     Miniscope.add_attribute(
         name="msCamExposure",
         doc="exposure of camera (max=255)",
