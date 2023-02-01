@@ -90,7 +90,6 @@ def read_notes(fpath):
 
 
 def get_starting_frames(video_files):
-
     import cv2
 
     out = [0]
