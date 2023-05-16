@@ -8,4 +8,4 @@ namespaces:
     neurodata_types:
     - Device
   - source: ndx-miniscope.extensions.yaml
-  version: 0.2.2
+  version: 0.3.1

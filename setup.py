@@ -16,7 +16,7 @@ with open(path / "requirements.txt") as f:
 
 setup_args = {
     "name": "ndx-miniscope",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "holds metadata relevant for miniscope acquisition",
     "long_description": long_description,
     "author": "Ben Dichter",

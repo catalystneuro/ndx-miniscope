@@ -1,13 +1,49 @@
 groups:
 - neurodata_type_def: Miniscope
   neurodata_type_inc: Device
-  doc: extension of Device to hold metadata specific to Miniscopes
+  doc: The extension of Device to hold metadata specific to Miniscopes.
   attributes:
+  - name: version
+    dtype: text
+    doc: The version of Miniscope e.g., V3, V4.
+    required: false
+  - name: compression
+    dtype: text
+    doc: The type of compression CODEC. GREY is no compression. FFV1 losslessly compresses.
+    required: false
+  - name: deviceType
+    dtype: text
+    doc: A device type supported by Miniscope-DAQ Software (e.g., Miniscope_V4_BNO).
+    required: false
+  - name: frameRate
+    dtype: text
+    doc: Frame rate (e.g., 20FPS)
+    required: false
+  - name: framesPerFile
+    dtype: int
+    doc: The number of frames stored per file.
+    required: false
+  - name: gain
+    dtype: text
+    doc: Gain settings corresponding to Low, Medium, High.
+    required: false
+  - name: led0
+    dtype: int
+    doc: Excitation LED intensity (range 0 - 100).
+    required: false
   - name: excitation
     dtype: int
-    doc: magnitude of excitation
+    doc: The magnitude of excitation.
     required: false
   - name: msCamExposure
     dtype: int
-    doc: exposure of camera (max=255)
+    doc: The exposure of camera (max=255).
     required: false
+  datasets:
+  - name: ROI
+    dtype: int
+    shape:
+    - null
+    doc: The bounding box (height x width) of the portion of the video that is saved
+      to disk.
+    quantity: '?'
