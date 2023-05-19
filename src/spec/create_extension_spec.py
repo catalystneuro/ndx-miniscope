@@ -6,7 +6,7 @@ def main():
     ns_builder = NWBNamespaceBuilder(
         doc="holds metadata relevant for miniscope acquisition",
         name="ndx-miniscope",
-        version="0.3.1",
+        version="0.4.0",
         author="Ben Dichter",
         contact="ben.dichter@catalystneuro.com",
     )
