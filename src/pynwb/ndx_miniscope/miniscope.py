@@ -1,103 +1,18 @@
 import os
 
 import pandas as pd
-from hdmf import docval
-from hdmf.utils import get_docval, popargs
-from pynwb.device import Device
 from pynwb.misc import AnnotationSeries
 
-from pynwb import register_class
+from pynwb import get_class, load_namespaces
 
+name = "ndx-miniscope"
 
-@register_class("Miniscope", "ndx-miniscope")
-class Miniscope(Device):
-    """The extension of Device to hold metadata specific to Miniscopes."""
+here = os.path.abspath(os.path.dirname(__file__))
+ns_path = os.path.join(here, "spec", name + ".namespace.yaml")
 
-    __nwbfields__ = (
-        "version",
-        "compression",
-        "deviceType",
-        "frameRate",
-        "framesPerFile",
-        "gain",
-        "led0",
-        "excitation",
-        "msCamExposure",
-        "ROI",
-    )
+load_namespaces(ns_path)
 
-    @docval(
-        *get_docval(
-            Device.__init__,
-            "name",
-        ),  # required
-        {
-            "name": "version",
-            "type": str,
-            "doc": "The version of Miniscope e.g., V3, V4.",
-            "default": None,
-        },
-        {
-            "name": "compression",
-            "type": str,
-            "doc": "The type of Compression CODEC. GREY is no compression. FFV1 losslessly compresses.",
-            "default": None,
-        },
-        {
-            "name": "deviceType",
-            "type": str,
-            "doc": "A device type supported by Miniscope-DAQ Software (e.g., Miniscope_V4_BNO).",
-            "default": None,
-        },
-        {
-            "name": "frameRate",
-            "type": str,
-            "doc": "Frame rate (e.g., 20FPS)",
-            "default": None,
-        },
-        {
-            "name": "framesPerFile",
-            "type": int,
-            "doc": "The number of frames stored per file.",
-            "default": None,
-        },
-        {
-            "name": "gain",
-            "type": str,
-            "doc": "Gain settings corresponding to Low, Medium, High.",
-            "default": None,
-        },
-        {
-            "name": "led0",
-            "type": int,
-            "doc": "Excitation LED intensity (range 0 - 100).",
-            "default": None,
-        },
-        {
-            "name": "excitation",
-            "type": int,
-            "doc": "The magnitude of excitation.",
-            "default": None,
-        },
-        {
-            "name": "msCamExposure",
-            "type": int,
-            "doc": "The exposure of camera (max=255).",
-            "default": None,
-        },
-        {
-            "name": "ROI",
-            "type": ("array_data", "data"),
-            "doc": "The bounding box (height x width) of the portion of the video that is saved to disk. Edges are zero-indexed.",
-            "default": None,
-            "shape": (None,),
-        },
-    )
-    def __init__(self, **kwargs):
-        name = popargs("name", kwargs)
-        super().__init__(name=name)
-        for config_name, config_value in kwargs.items():
-            setattr(self, config_name, config_value)
+Miniscope = get_class("Miniscope", name)
 
 
 def read_miniscope_timestamps(fpath, cam_num=1):
