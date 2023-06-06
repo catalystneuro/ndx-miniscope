@@ -17,12 +17,6 @@ def main():
         doc="The extension of Device to hold metadata specific to Miniscopes.",
     )
     Miniscope.add_attribute(
-        name="version",
-        doc="The version of Miniscope e.g., V3, V4.",
-        dtype="text",
-        required=False,
-    )
-    Miniscope.add_attribute(
         name="compression",
         doc="The type of compression CODEC. GREY is no compression. FFV1 losslessly compresses.",
         dtype="text",
@@ -30,7 +24,7 @@ def main():
     )
     Miniscope.add_attribute(
         name="deviceType",
-        doc="A device type supported by Miniscope-DAQ Software (e.g., Miniscope_V4_BNO).",
+        doc="A device type supported by Miniscope-DAQ Software (e.g., 'Miniscope_V4_BNO', 'Miniscope_V3').",
         dtype="text",
         required=False,
     )

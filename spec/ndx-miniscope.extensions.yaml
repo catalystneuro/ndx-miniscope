@@ -3,17 +3,14 @@ groups:
   neurodata_type_inc: Device
   doc: The extension of Device to hold metadata specific to Miniscopes.
   attributes:
-  - name: version
-    dtype: text
-    doc: The version of Miniscope e.g., V3, V4.
-    required: false
   - name: compression
     dtype: text
     doc: The type of compression CODEC. GREY is no compression. FFV1 losslessly compresses.
     required: false
   - name: deviceType
     dtype: text
-    doc: A device type supported by Miniscope-DAQ Software (e.g., Miniscope_V4_BNO).
+    doc: A device type supported by Miniscope-DAQ Software (e.g., 'Miniscope_V4_BNO',
+      'Miniscope_V3').
     required: false
   - name: frameRate
     dtype: text
