@@ -17,14 +17,15 @@ with open(path / "requirements.txt") as f:
 setup_args = {
     "name": "ndx-miniscope",
     "version": "0.4.0",
-    "description": "holds metadata relevant for miniscope acquisition",
+    "description": "Represent metadata for Miniscope acquisition system.",
     "long_description": long_description,
+    "long_description_content_type": "text/markdown",
     "author": "Ben Dichter",
     "author_email": "ben.dichter@catalystneuro.com",
     "url": "https://github.com/catalystneuro/ndx-miniscope",
-    "license": "",
+    "license": "BSD-3",
     "install_requires": install_requires,
-    "packages": find_packages("src/pynwb"),
+    'packages': find_packages("src/pynwb", exclude=["tests", "tests.*"]),
     "package_dir": {"": "src/pynwb"},
     "package_data": {
         "ndx_miniscope": [
@@ -35,6 +36,12 @@ setup_args = {
     "classifiers": [
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
+    ],
+    "keywords": [
+        "NeurodataWithoutBorders",
+        "NWB",
+        "nwb-extension",
+        "ndx-extension",
     ],
     "zip_safe": False,
 }
