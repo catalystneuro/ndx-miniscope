@@ -25,7 +25,7 @@ setup_args = {
     "url": "https://github.com/catalystneuro/ndx-miniscope",
     "license": "BSD-3",
     "install_requires": install_requires,
-    'packages': find_packages("src/pynwb", exclude=["tests", "tests.*"]),
+    "packages": find_packages("src/pynwb", exclude=["tests", "tests.*"]),
     "package_dir": {"": "src/pynwb"},
     "package_data": {
         "ndx_miniscope": [
