@@ -1,4 +1,5 @@
 import os
+
 from pynwb import get_class, load_namespaces
 
 name = "ndx-miniscope"
