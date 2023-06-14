@@ -2,7 +2,7 @@ import json
 from copy import deepcopy
 from datetime import datetime
 from pathlib import Path
-from typing import List, Optional, Dict
+from typing import Dict, List, Optional
 
 import numpy as np
 import pandas as pd
@@ -28,7 +28,9 @@ def get_recording_start_times(folder_path: str) -> List[datetime]:
     folder_path = Path(folder_path)
     configuration_file_name = "metaData.json"
     miniscope_config_files = natsorted(list(folder_path.glob(f"*/{configuration_file_name}")))
-    assert miniscope_config_files, f"The configuration files ('{configuration_file_name}') are missing from '{folder_path}'."
+    assert (
+        miniscope_config_files
+    ), f"The configuration files ('{configuration_file_name}') are missing from '{folder_path}'."
 
     recording_start_times = []
     for config_file_path in miniscope_config_files:
