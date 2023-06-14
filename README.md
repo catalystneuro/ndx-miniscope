@@ -33,7 +33,8 @@ pip install -e .
 
 ```python
 import os
-from ndx_miniscope import read_settings, read_notes, read_miniscope_timestamps, get_starting_frames
+from ndx_miniscope.legacy_utils import read_settings, read_notes, read_miniscope_timestamps
+from ndx_miniscope.utils import get_starting_frames
 from pynwb import NWBFile, NWBHDF5IO
 from datetime import datetime
 from dateutil.tz import tzlocal
