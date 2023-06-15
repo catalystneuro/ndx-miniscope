@@ -8,11 +8,50 @@ from typing import Dict, List, Optional
 import numpy as np
 import pandas as pd
 from natsort import natsorted
+from packaging import version
 
 from pynwb import NWBFile
 from pynwb.misc import AnnotationSeries
 
 from ndx_miniscope import Miniscope
+
+
+def get_miniscope_version(folder_path: str) -> version.Version:
+    """
+    Returns the version of the Miniscope based on the configuration files.
+
+    The latest Miniscope software creates user configuration files in JSON format.
+    https://github.com/Aharoni-Lab/Miniscope-DAQ-QT-Software/wiki/User-Configuration-Files
+
+    The legacy software used to create a 'settings_and_notes.dat' file.
+    http://miniscope.org/index.php/Data_Acquisition_Software
+
+    Parameters
+    ----------
+    folder_path : str
+        The folder path that points to the main Miniscope folder.
+        The configuration files are expected to be located in subfolders within the main folder.
+
+    Returns
+    -------
+    version.Version
+        The version of the Miniscope based on the configuration files.
+        Returns a version object 'v4' for the latest software,
+        'v3' for the legacy software, or raises a NotImplementedError
+        if the version cannot be determined.
+
+    """
+    folder_path = Path(folder_path)
+
+    config_files = list(folder_path.rglob("*.json"))
+    if config_files:
+        return version.Version("v4")
+
+    legacy_config_files = list(folder_path.rglob("*.dat"))
+    if legacy_config_files:
+        return version.Version("v3")
+
+    raise NotImplementedError("Could not determine the version of the Miniscope.")
 
 
 def read_miniscope_timestamps(fpath, cam_num=1):
