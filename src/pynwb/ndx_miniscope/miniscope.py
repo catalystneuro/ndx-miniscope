@@ -1,5 +1,5 @@
-import os
 import json
+import os
 from copy import deepcopy
 from datetime import datetime
 from pathlib import Path
@@ -10,12 +10,11 @@ import pandas as pd
 from hdmf.backends.hdf5 import H5DataIO
 from natsort import natsorted
 from packaging import version
-
-from pynwb import NWBFile
 from pynwb.image import ImageSeries
 from pynwb.misc import AnnotationSeries
 
 from ndx_miniscope import Miniscope
+from pynwb import NWBFile
 
 
 def read_miniscope_timestamps(folder_path: str, cam_num=1):
@@ -230,11 +229,10 @@ def get_starting_frames(folder_path: str, video_file_pattern: str = "*/BehavCam*
 
 
 def get_timestamps(
-        folder_path: str,
-        file_pattern: Optional[str] = "Miniscope/timeStamps.csv",
-        cam_num: int = 1,
+    folder_path: str,
+    file_pattern: Optional[str] = "Miniscope/timeStamps.csv",
+    cam_num: int = 1,
 ) -> np.ndarray:
-
     miniscope_version = get_miniscope_version(folder_path=folder_path)
     if miniscope_version == version.Version("v3"):
         return read_miniscope_timestamps(folder_path=folder_path, cam_num=cam_num)
@@ -311,8 +309,12 @@ def add_miniscope_image_series(
 
     """
     assert "Behavior" in metadata, "The metadata for ImageSeries and Device should be stored in 'Behavior'."
-    assert "ImageSeries" in metadata["Behavior"], "The metadata for ImageSeries should be stored in metadata['Behavior']['ImageSeries']."
-    assert "Device" in metadata["Behavior"], "The metadata for Device should be stored in metadata['Behavior']['Device']."
+    assert (
+        "ImageSeries" in metadata["Behavior"]
+    ), "The metadata for ImageSeries should be stored in metadata['Behavior']['ImageSeries']."
+    assert (
+        "Device" in metadata["Behavior"]
+    ), "The metadata for Device should be stored in metadata['Behavior']['Device']."
     image_series_kwargs = deepcopy(metadata["Behavior"]["ImageSeries"][image_series_index])
     image_series_name = image_series_kwargs["name"]
 
@@ -330,7 +332,9 @@ def add_miniscope_image_series(
     assert external_files, "'external_files' must be specified."
     if starting_frames is None and len(external_files) == 1:
         starting_frames = [0]
-    assert len(starting_frames) == len(external_files), "The number of external files must match the length of 'starting_frame'."
+    assert len(starting_frames) == len(
+        external_files
+    ), "The number of external files must match the length of 'starting_frame'."
     image_series_kwargs.update(
         format="external",
         external_file=external_files,
