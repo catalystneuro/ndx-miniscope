@@ -97,4 +97,3 @@ def read_v4_miniscope_config(folder_path: str) -> Dict:
     miniscope_config.pop("deviceID", None)
 
     return miniscope_config
-

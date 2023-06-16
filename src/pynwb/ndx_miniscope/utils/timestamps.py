@@ -113,4 +113,3 @@ def read_miniscope_timestamps(folder_path: str, cam_num=1):
     tt = df_cam["sysClock"].values / 1000
     tt[0] = 0
     return tt
-

@@ -1,12 +1,12 @@
 from copy import deepcopy
-from typing import Dict, Optional, List
+from typing import Dict, List, Optional
 
 import numpy as np
 from hdmf.backends.hdf5 import H5DataIO
-from pynwb import NWBFile
 from pynwb.image import ImageSeries
 
 from ndx_miniscope import Miniscope
+from pynwb import NWBFile
 
 
 def add_miniscope_device(nwbfile: NWBFile, device_metadata: Dict) -> NWBFile:

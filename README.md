@@ -94,7 +94,7 @@ behavcam_metadata = read_miniscope_config(folder_path=behavcam_folder_path)
 # Create the Miniscope device with the behavioral camera metadata and add it to NWB
 add_miniscope_device(nwbfile=nwbfile, device_metadata=behavcam_metadata)
 
-# Loading the timestamps 
+# Loading the timestamps
 behavcam_timestamps = get_timestamps(folder_path=folder_path, file_pattern="BehavCam*/timeStamps.csv")
 # Load the starting frames of the video files
 # Note this function requires to have `cv2` installed
