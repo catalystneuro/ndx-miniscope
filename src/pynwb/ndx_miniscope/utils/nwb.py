@@ -9,7 +9,7 @@ from ndx_miniscope import Miniscope
 from pynwb import NWBFile
 
 
-def add_miniscope_device(nwbfile: NWBFile, device_metadata: Dict) -> NWBFile:
+def add_miniscope_device(nwbfile: NWBFile, device_metadata: dict) -> NWBFile:
     """
     Adds a Miniscope device based on provided metadata.
     Can be used to add device for the microscope and the behavioral camera.
@@ -18,7 +18,7 @@ def add_miniscope_device(nwbfile: NWBFile, device_metadata: Dict) -> NWBFile:
     ----------
     nwbfile : NWBFile
         The nwbfile to add the Miniscope device to.
-    device_metadata: Dict
+    device_metadata: dict
         The metadata for the device to be added.
 
     Returns
@@ -45,7 +45,7 @@ def add_miniscope_device(nwbfile: NWBFile, device_metadata: Dict) -> NWBFile:
 
 def add_miniscope_image_series(
     nwbfile: NWBFile,
-    metadata: Dict,
+    metadata: dict,
     timestamps: np.ndarray,
     image_series_index: int = 0,
     external_files: Optional[List[str]] = None,

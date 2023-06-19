@@ -44,7 +44,7 @@ def get_miniscope_version(folder_path: str) -> version.Version:
     raise NotImplementedError("Could not determine the version of the Miniscope.")
 
 
-def read_miniscope_config(folder_path: str) -> Dict:
+def read_miniscope_config(folder_path: str) -> dict:
     """
     Loads the configuration file as dictionary object from the main Miniscope folder.
 
@@ -64,7 +64,7 @@ def read_miniscope_config(folder_path: str) -> Dict:
 
     Returns
     -------
-    Dict
+    dict
         The dictionary with the Miniscope settings.
 
     """
@@ -86,7 +86,7 @@ def read_v3_miniscope_config(folder_path: str):
     )
 
 
-def read_v4_miniscope_config(folder_path: str) -> Dict:
+def read_v4_miniscope_config(folder_path: str) -> dict:
     file_path = os.path.join(folder_path, "metaData.json")
     with open(file_path, newline="") as f:
         miniscope_config = json.loads(f.read())
