@@ -13,14 +13,14 @@ The data recorded by the software is saved in a folder structure similar to this
         C6-J588_Disc5/ (main folder)
         ├── 15_03_28/ (subfolder corresponding to the recording time)
         │   ├── Miniscope/ (subfolder containing the microscope video stream)
-        │   │   ├── 0.avi (file containing the microscope video)
-        │   │   ├── metaData.json (file containing the metadata for the microscope device)
-        │   │   └── timeStamps.csv (file containing the timing of this video stream)
+        │   │   ├── 0.avi (microscope video)
+        │   │   ├── metaData.json (metadata for the microscope device)
+        │   │   └── timeStamps.csv (timing of this video stream)
         │   ├── BehavCam_2/ (subfolder containing the behavioral video stream)
-        │   │   ├── 0.avi (file containing the bevavioral video)
-        │   │   ├── metaData.json (file containing the metadata for the behavioral camera)
-        │   │   └── timeStamps.csv (file containing the timing of this video stream)
-        │   └── metaData.json (file containing metadata for the recording, such as the start time)
+        │   │   ├── 0.avi (bevavioral video)
+        │   │   ├── metaData.json (metadata for the behavioral camera)
+        │   │   └── timeStamps.csv (timing of this video stream)
+        │   └── metaData.json (metadata for the recording, such as the start time)
         ├── 15_06_28/
         │   ├── Miniscope/
         │   ├── BehavCam_2/
