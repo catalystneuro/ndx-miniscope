@@ -10,21 +10,22 @@ Depending on the version of the acquisition software the data structure can be q
 ## Miniscope V4 format
 The data recorded by the software is saved in a folder structure similar to this:
 
-* `C6-J588_Disc5/` (main folder)
-   * `15_03_28/` (subfolder corresponding to the recording time)
-        * `Miniscope/` (subfolder containing the microscope video stream)
-            * `0.avi` (file containing the microscope video)
-            * `metaData.json` (file containing the metadata for the microscope device)
-            * `timeStamps.csv` (file containing the timing of this video stream)
-        * `BehavCam_2/` (subfolder containing the behavioral video stream)
-            * `0.avi` (file containing the bevavioral video)
-            * `metaData.json` (file containing the metadata for the behavioral camera)
-            * `timeStamps.csv` (file containing the timing of this video stream)
-        * `metaData.json` (file containing metadata for the recording, such as the start time)
-   * `15_06_28/` (another subfolder)
-        * `Miniscope/`
-        * `BehavCam_2/`
-        * `metaData.json`
+        C6-J588_Disc5/ (main folder)
+        ├── 15_03_28/ (subfolder corresponding to the recording time)
+        │   ├── Miniscope/ (subfolder containing the microscope video stream)
+        │   │   ├── 0.avi (file containing the microscope video)
+        │   │   ├── metaData.json (file containing the metadata for the microscope device)
+        │   │   └── timeStamps.csv (file containing the timing of this video stream)
+        │   ├── BehavCam_2/ (subfolder containing the behavioral video stream)
+        │   │   ├── 0.avi (file containing the bevavioral video)
+        │   │   ├── metaData.json (file containing the metadata for the behavioral camera)
+        │   │   └── timeStamps.csv (file containing the timing of this video stream)
+        │   └── metaData.json (file containing metadata for the recording, such as the start time)
+        ├── 15_06_28/
+        │   ├── Miniscope/
+        │   ├── BehavCam_2/
+        │   └── metaData.json
+        └── 15_12_28/
 
 ## Miniscope V3 format
 The Miniscope V3 acquisition software generally outputs the following files:
