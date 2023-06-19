@@ -1,5 +1,5 @@
 from copy import deepcopy
-from typing import Dict, List, Optional
+from typing import List, Optional
 
 import numpy as np
 from hdmf.backends.hdf5 import H5DataIO
