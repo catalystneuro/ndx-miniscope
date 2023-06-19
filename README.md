@@ -101,7 +101,6 @@ behavcam_timestamps = get_timestamps(folder_path=folder_path, file_pattern="Beha
 # Note this function requires to have `cv2` installed
 starting_frames = get_starting_frames(folder_path=folder_path, video_file_pattern="*/BehavCam*/*.avi")
 
-# TODO: redirect to MiniscopeConverter
 
 # Legacy usage for Miniscope V3
 
