@@ -48,7 +48,7 @@ pip install neuroconv[miniscope]
 ```
 
 The `MiniscopeConverter` combines the imaging and behavior data streams into a single conversion.
- 
+
 ```jupyterpython
 from dateutil import tz
 from neuroconv.converters import MiniscopeConverter
@@ -90,7 +90,7 @@ Fields:
   framesPerFile: 1000
   gain: High
   led0: 47
-  
+
 BehavCam2 abc.Miniscope at 0x5775972816
 Fields:
   ROI: <HDF5 dataset "ROI": shape (2,), type "<i8">
@@ -99,7 +99,7 @@ Fields:
   framesPerFile: 1000
 ```
 The imaging data was added to the `NWBFile` as `OnePhotonSeries` which can be accessed
-from the file as the follows: 
+from the file as the follows:
 ```jupyterpython
 from pynwb import NWBHDF5IO
 
@@ -145,7 +145,7 @@ Fields:
   unit: px
 ```
 The behavior camera data was added to the `NWBFile` as `ImageSeries` which can be accessed
-from the file as the follows: 
+from the file as the follows:
 ```jupyterpython
 from pynwb import NWBHDF5IO
 
@@ -180,8 +180,8 @@ Fields:
   unit: px
 ```
 
-For more information about accessing data in NWB, visit the [File Basics tutorial](https://pynwb.readthedocs.io/en/stable/tutorials/general/file.html). 
-To learn more about NeuroConv, visit this [documentation page](https://neuroconv.readthedocs.io/en/main/index.html). 
+For more information about accessing data in NWB, visit the [File Basics tutorial](https://pynwb.readthedocs.io/en/stable/tutorials/general/file.html).
+To learn more about NeuroConv, visit this [documentation page](https://neuroconv.readthedocs.io/en/main/index.html).
 
 
 
