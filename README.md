@@ -49,7 +49,7 @@ pip install neuroconv[miniscope]
 
 The `MiniscopeConverter` combines the imaging and behavior data streams into a single conversion.
 
-```jupyterpython
+```python
 from dateutil import tz
 from neuroconv.converters import MiniscopeConverter
 
@@ -70,7 +70,7 @@ converter.run_conversion(nwbfile_path=nwbfile_path, metadata=metadata)
 ### Access the data from NWB
 
 Access the `Miniscope` devices from the in-memory `NWBFile`.
-```jupyterpython
+```python
 from pynwb import NWBHDF5IO
 
 nwbfile_path = "miniscope.nwb"
@@ -81,7 +81,7 @@ with NWBHDF5IO(nwbfile_path, "r") as io:
     # Access the device that holds the metadata for the behavior camera
     nwbfile_in.devices["BehavCam2"]
 ```
-```jupyter
+```
 Miniscope abc.Miniscope at 0x5775754960
 Fields:
   compression: FFV1
@@ -100,7 +100,7 @@ Fields:
 ```
 The imaging data was added to the `NWBFile` as `OnePhotonSeries` which can be accessed
 from the file as the follows:
-```jupyterpython
+```python
 from pynwb import NWBHDF5IO
 
 nwbfile_path = "miniscope.nwb"
@@ -109,7 +109,7 @@ with NWBHDF5IO(nwbfile_path, "r") as io:
     # Access the OnePhotonSeries that holds the imaging data from the microscope.
     nwbfile.acquisition["OnePhotonSeries"]
 ```
-```jupyter
+```
 OnePhotonSeries pynwb.ophys.OnePhotonSeries at 0x5775755728
 Fields:
   comments: no comments
@@ -146,7 +146,7 @@ Fields:
 ```
 The behavior camera data was added to the `NWBFile` as `ImageSeries` which can be accessed
 from the file as the follows:
-```jupyterpython
+```python
 from pynwb import NWBHDF5IO
 
 nwbfile_path = "miniscope.nwb"
@@ -155,7 +155,7 @@ with NWBHDF5IO(nwbfile_path, "r") as io:
     # Access the ImageSeries that holds the behavior data.
     nwbfile.acquisition["BehavCamImageSeries"]
 ```
-```jupyter
+```
 BehavCamImageSeries pynwb.image.ImageSeries at 0x5775971616
 Fields:
   comments: no comments
